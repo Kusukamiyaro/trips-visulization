@@ -33,22 +33,24 @@ export class TripService {
       prevTrip.type = (level_connection &&  level_connection.type === 'level-2') ? 'connected-to-level-2' : 'continue';
    
    
-    } else {
-      prevTrip.type = 'disconnected';
-    }
+    } 
   
-    if (prevTrip.start === currentTrip.start && prevTrip.end === currentTrip.end) {
+  else  if (prevTrip.start === currentTrip.start && prevTrip.end === currentTrip.end) {
         if(prevTrip.y ==200){
             prevTrip.y -= 50;
         }
       
-      currentTrip.y = prevTrip.y;
-      prevTrip.type = 'level-2';
-     
-      if(level_connection.type!=='connected-to-level-2' ){
+        currentTrip.y = prevTrip.y;
+        prevTrip.type = 'level-2';
+      if(level_connection && level_connection.type!=='level-2'){
         level_connection.type = 'connected-to-level-2'
       }
+     
+    }else{
+      prevTrip.type = (level_connection &&  level_connection.type === 'level-2') ? 'connected-to-level-2' : 'disconnected';
     }
+   
+    
    console.log( this.trips)
   }
   
